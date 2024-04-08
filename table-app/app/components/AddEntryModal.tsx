@@ -28,17 +28,17 @@ const AddEntryModal = () => {
             <Button type="primary" onClick={showModal}>
                 add entry
             </Button>
-            <Modal 
-                title="New Entry" 
-                open={isModalOpen} 
-                onOk={handleOk} 
+            <Modal
+                title="New Entry"
+                open={isModalOpen}
+                onOk={handleOk}
                 onCancel={handleCancel}
                 footer={[
                     <Button form='myform' key='submit' htmlType='submit'>Submit</Button>
                 ]}
                 width={360}
                 >
-                <AddEntryForm />
+                <AddEntryForm onFinishCb={handleOk}/>
             </Modal>
         </>
     )

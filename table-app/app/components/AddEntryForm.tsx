@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button, Checkbox, Flex, Form, type FormProps, Input, InputNumber, Space } from 'antd';
 
+interface Props{
+    onFinishCb: (values: FieldType) => void;
+}
+
 type FieldType = {
     id?: Number;
     name?: string;
@@ -15,7 +19,7 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-const AddEntryForm = () => {
+const AddEntryForm = ({onFinishCb}: Props) => {
     return (
         <Form
             name="basic"
@@ -23,7 +27,7 @@ const AddEntryForm = () => {
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
             initialValues={{ remember: true }}
-            onFinish={onFinish}
+            onFinish={onFinishCb}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             id='myform'
