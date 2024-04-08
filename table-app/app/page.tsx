@@ -2,7 +2,7 @@
 import TableComponent from "./components/TableComponent";
 import path from 'path';
 import fsPromises from 'fs/promises';
-import AddEntry from "./components/AddEntry";
+import AddEntryModal from "./components/AddEntryModal";
 import { Space } from "antd";
 
 interface User {
@@ -19,8 +19,8 @@ export default async function Home() {
   return (
     <div>
       <Space direction='vertical'>
-        <h1>Hier ist eine Testtabelle</h1>
-        <AddEntry />
+        <h1>Sample Table</h1>
+        <AddEntryModal />
         <TableComponent users={users}/>
       </Space>
     </div>
