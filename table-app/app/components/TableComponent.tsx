@@ -1,4 +1,4 @@
-import React from 'react';
+'use client'
 import { Input, Table } from "antd";
 import type { TableColumnsType } from 'antd';
 
@@ -11,17 +11,32 @@ interface User {
 
 interface Props {
     users: User[];
-    columns: TableColumnsType<User>;
 }
 
-const TableComponent = ( {users, columns}: Props ) => {
+const TableComponent = ( {users}: Props ) => {
+    const innerColumns: TableColumnsType<User> = [
+        {
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+          defaultSortOrder: 'descend',
+          sorter: (a, b) => a.id - b.id,
+        },
+        {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+          sorter: (a, b) => a.name.localeCompare(b.name)
+        },
+        {
+          title: 'Username',
+          dataIndex: 'username',
+          key: 'username',
+          sorter: (a, b) => a.username.localeCompare(b.username)
+        },
+      ];
     return (
-        <div>
-            <Input placeholder='ID' />
-            <Input placeholder='Name' />
-            <Input placeholder='Username' />
-            <Table dataSource={users} columns={columns} rowKey="id"/>
-        </div>
+        <Table dataSource={users} columns={innerColumns} rowKey="id"/>
     )
 }
 
