@@ -4,6 +4,7 @@ import path from 'path';
 import fsPromises from 'fs/promises';
 import AddEntryModal from "./components/AddEntryModal";
 import { Space } from "antd";
+import { loadUsers } from "./actions";
 
 interface User {
   id: number;
@@ -13,16 +14,13 @@ interface User {
 
 export default async function Home() {
 
-  let userJson = await fsPromises.readFile(path.join(process.cwd(), 'users.json'), 'utf-8');
-  let users: User[] = await JSON.parse(userJson);
+  let users: User[] = await loadUsers();
 
   return (
-    <div>
-      <Space direction='vertical'>
-        <h1>Sample Table</h1>
-        <AddEntryModal />
-        <TableComponent users={users}/>
-      </Space>
-    </div>
+    <Space direction='vertical'>
+      <h1>Sample Table</h1>
+      <AddEntryModal />
+      <TableComponent users={users}/>
+    </Space>
   );
 }

@@ -2,11 +2,7 @@
 import { Button, FormProps, Input, InputNumber, InputNumberProps, InputProps, Modal, Space } from 'antd'
 import React, { useState } from 'react'
 import AddEntryForm from './AddEntryForm';
-import { saveUsers } from '@/app/actions';
-
-//TODO Check AddEntryModal ID
-//TODO diff require/import
-//TODO storing of new data
+import { saveUser } from '@/app/actions';
 
 type FieldType = {
     id?: Number;
@@ -34,7 +30,7 @@ const AddEntryModal = () => {
     const submit = (values: FieldType) => {
         // saveUsers(JSON.stringify(values))
         console.log('in submit:',values)
-        saveUsers(values)
+        saveUser(values)
     }
 
     return (
@@ -43,14 +39,13 @@ const AddEntryModal = () => {
                 add entry
             </Button>
             <Modal
+                width={200}
                 title="New Entry"
                 open={isModalOpen}
-                onOk={handleOk}
                 onCancel={handleCancel}
                 footer={[
                     <Button form='myform' key='submit' htmlType='submit'>Submit</Button>
                 ]}
-                width={200}
                 >
                 <AddEntryForm onFinishCb={(e: FieldType) => {submit(e); handleOk();}}/>
             </Modal>

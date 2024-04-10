@@ -2,6 +2,7 @@
 import path from 'path';
 import fsPromises from 'fs/promises';
 import fs from 'fs';
+import { revalidatePath } from 'next/cache';
 
 interface User {
     id: number;
@@ -9,21 +10,39 @@ interface User {
     username: string;
 }
 
+const dataFile = 'data.json';
+
 export async function loadUsers() {
-    let userJson = await fsPromises.readFile(path.join(process.cwd(), 'users.json'), 'utf-8');
+    let userJson = await fsPromises.readFile(path.join(process.cwd(), dataFile), 'utf-8');
     let users: User[] = await JSON.parse(userJson);
     return users;
 }
 
 
-export async function saveUsers(user: any) {
-    let userJson = await fsPromises.readFile(path.join(process.cwd(), 'data.json'), 'utf-8');
-    let users: User[] = await JSON.parse(userJson);
+export async function saveUser(user: any) {
+    let users = await loadUsers();
     users.push(user);
-    let write = await fs.writeFile(path.join(process.cwd(), 'data.json'), JSON.stringify(users), (e) => console.log());
+    saveUsers(users);
+}
+
+export async function saveUsers(users: User[]) {
+    let write = await fs.writeFile(path.join(process.cwd(), dataFile), JSON.stringify(users), (e) => console.log());
+    revalidatePath('/');
     return write;
 }
 
-export async function removeUser(id:Number) {
-    
+export async function removeUser(id: number) {
+    let users = await loadUsers();
+    let index = users.map( (e) => e.id).indexOf(id);
+    if (index > -1) {
+        users.splice(index, 1);
+    }
+    saveUsers(users);
+}
+
+export async function validateId(id:number) {
+    let users = await loadUsers();
+    let index = users.map( (e) => e.id).indexOf(id);
+    if (index === -1) return true;
+    else return false;
 }

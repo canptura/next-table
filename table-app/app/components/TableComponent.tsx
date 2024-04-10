@@ -1,7 +1,7 @@
 'use client'
 import { Button, Input, Table } from "antd";
 import type { TableColumnsType } from 'antd';
-import { loadUsers } from "@/app/actions";
+import { removeUser } from "@/app/actions";
 
 
 interface User {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const TableComponent = ( {users}: Props ) => {
-    const innerColumns: TableColumnsType<User> = [
+    const columns: TableColumnsType<User> = [
         {
           title: 'ID',
           dataIndex: 'id',
@@ -35,11 +35,17 @@ const TableComponent = ( {users}: Props ) => {
           key: 'username',
           sorter: (a, b) => a.username.localeCompare(b.username)
         },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (_, record) => (
+            <a onClick={ () => removeUser(record.id)}>delete</a>
+          )
+        }
       ];
     return (
       <>
-        <Button onClick={ (e) => console.log(loadUsers()) }>TEST</Button>
-        <Table dataSource={users} columns={innerColumns} rowKey="id"/>
+        <Table dataSource={users} columns={columns} rowKey="id"/>
       </>
     )
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Checkbox, Flex, Form, type FormProps, Input, InputNumber, Space } from 'antd';
+import { validateId } from '../actions';
 
 interface Props{
     onFinishCb: (values: FieldType) => void;
+    // validateId: (id: number) => boolean;
 }
 
 type FieldType = {
@@ -20,13 +22,15 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 };
 
 const AddEntryForm = ({onFinishCb}: Props) => {
+    const [form] = Form.useForm()
     return (
         <Form
             name="basic"
             // wrapperCol={{ span: 22 }}
             // style={{ maxWidth: 600 }}
+            form={form}
             initialValues={{ remember: true }}
-            onFinish={(e) => {onFinish(e); onFinishCb(e)}}
+            onFinish={(e) => {onFinish(e); onFinishCb(e); form.resetFields()}}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             id='myform'
@@ -34,12 +38,30 @@ const AddEntryForm = ({onFinishCb}: Props) => {
             <Flex vertical>
 
                 <Form.Item<FieldType>
+                    hasFeedback
                     label=""
                     name="id"
-                    rules={[{ required: true, message: 'Please input a ID!' }]}
+                    validateDebounce={1000}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input a ID!'
+
+                        },
+                        {
+                            message: 'ID already taken!',
+                            validator: async (_, value) => {
+                                if (await validateId(value)) {
+                                    return Promise.resolve();
+                                } else {
+                                    return Promise.reject('some MSG');
+                                }
+                            }
+                        }
+                    ]}
                 >
-                    <InputNumber 
-                            placeholder='ID..' 
+                    <InputNumber
+                            placeholder='ID..'
                             min={0}
                             type='Number'
                             changeOnWheel
@@ -51,7 +73,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     name="name"
                     rules={[{ required: true, message: 'Please input a name!' }]}
                 >
-                    <Input 
+                    <Input
                         placeholder='Name..'
                     />
                 </Form.Item>
@@ -61,7 +83,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     name="username"
                     rules={[{ required: true, message: 'Please input a username!' }]}
                 >
-                    <Input 
+                    <Input
                         placeholder='Username..'
                     />
                 </Form.Item>
