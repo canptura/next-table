@@ -1,5 +1,5 @@
 'use client'
-import { Button, Input, Table } from "antd";
+import { Table } from "antd";
 import type { TableColumnsType } from 'antd';
 import { removeUser } from "@/app/actions";
 
@@ -45,7 +45,7 @@ const TableComponent = ( {users}: Props ) => {
       ];
     return (
       <>
-        <Table dataSource={users} columns={columns} rowKey="id"/>
+        <Table dataSource={users} columns={columns} rowKey="id" style={{width: "50rem"}}/>
       </>
     )
 }

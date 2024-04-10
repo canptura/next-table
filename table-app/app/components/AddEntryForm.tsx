@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Checkbox, Flex, Form, type FormProps, Input, InputNumber, Space } from 'antd';
+import { Flex, Form, Input, InputNumber} from 'antd';
 import { validateId } from '../actions';
 
 interface Props{
@@ -13,27 +13,15 @@ type FieldType = {
     username?: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-
 const AddEntryForm = ({onFinishCb}: Props) => {
     const [form] = Form.useForm()
     return (
         <Form
-            name="basic"
-            // wrapperCol={{ span: 22 }}
-            // style={{ maxWidth: 600 }}
             form={form}
             initialValues={{ remember: true }}
-            onFinish={(e) => {onFinish(e); onFinishCb(e); form.resetFields()}}
-            onFinishFailed={onFinishFailed}
+            onFinish={(e) => {onFinishCb(e); form.resetFields()}}
             autoComplete="off"
-            id='myform'
+            id='newEntryForm'
         >
             <Flex vertical>
 
@@ -45,7 +33,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input a ID!'
+                            message: 'Please input a ID-number!'
 
                         },
                         {
@@ -63,6 +51,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     <InputNumber
                             placeholder='ID..'
                             min={0}
+                            max={9999}
                             type='Number'
                             changeOnWheel
                         />
@@ -73,9 +62,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     name="name"
                     rules={[{ required: true, message: 'Please input a name!' }]}
                 >
-                    <Input
-                        placeholder='Name..'
-                    />
+                    <Input placeholder='Name..' maxLength={20}/>
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -83,11 +70,8 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                     name="username"
                     rules={[{ required: true, message: 'Please input a username!' }]}
                 >
-                    <Input
-                        placeholder='Username..'
-                    />
+                    <Input placeholder='Username..' maxLength={20}/>
                 </Form.Item>
-
             </Flex>
         </Form>
     )

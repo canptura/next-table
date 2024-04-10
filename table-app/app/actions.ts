@@ -10,7 +10,7 @@ interface User {
     username: string;
 }
 
-const dataFile = 'data.json';
+const dataFile = 'users.json';
 
 export async function loadUsers() {
     let userJson = await fsPromises.readFile(path.join(process.cwd(), dataFile), 'utf-8');
@@ -26,7 +26,7 @@ export async function saveUser(user: any) {
 }
 
 export async function saveUsers(users: User[]) {
-    let write = await fs.writeFile(path.join(process.cwd(), dataFile), JSON.stringify(users), (e) => console.log());
+    let write = await fs.writeFile(path.join(process.cwd(), dataFile), JSON.stringify(users),()=>{});
     revalidatePath('/');
     return write;
 }

@@ -1,7 +1,5 @@
 'use server'
 import TableComponent from "./components/TableComponent";
-import path from 'path';
-import fsPromises from 'fs/promises';
 import AddEntryModal from "./components/AddEntryModal";
 import { Space } from "antd";
 import { loadUsers } from "./actions";
@@ -11,16 +9,19 @@ interface User {
   name: string;
   username: string;
 }
-
+//TODO Pagination dark mode
+//Light mode background fix
 export default async function Home() {
 
   let users: User[] = await loadUsers();
 
   return (
-    <Space direction='vertical'>
-      <h1>Sample Table</h1>
-      <AddEntryModal />
-      <TableComponent users={users}/>
-    </Space>
+    <div style={{margin: "auto", width: "50rem"}}>
+      <Space direction='vertical'>
+        <h1>Sample Table</h1>
+        <AddEntryModal />
+        <TableComponent users={users}/>
+      </Space>
+    </div>
   );
 }
