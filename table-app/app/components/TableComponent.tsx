@@ -1,6 +1,7 @@
 'use client'
-import { Input, Table } from "antd";
+import { Button, Input, Table } from "antd";
 import type { TableColumnsType } from 'antd';
+import { loadUsers } from "@/app/actions";
 
 
 interface User {
@@ -36,7 +37,10 @@ const TableComponent = ( {users}: Props ) => {
         },
       ];
     return (
+      <>
+        <Button onClick={ (e) => console.log(loadUsers()) }>TEST</Button>
         <Table dataSource={users} columns={innerColumns} rowKey="id"/>
+      </>
     )
 }
 

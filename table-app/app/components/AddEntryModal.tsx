@@ -1,10 +1,18 @@
 'use client'
-import { Button, Input, InputNumber, InputNumberProps, InputProps, Modal, Space } from 'antd'
+import { Button, FormProps, Input, InputNumber, InputNumberProps, InputProps, Modal, Space } from 'antd'
 import React, { useState } from 'react'
 import AddEntryForm from './AddEntryForm';
+import { saveUsers } from '@/app/actions';
 
 //TODO Check AddEntryModal ID
-//TODO Form in modal
+//TODO diff require/import
+//TODO storing of new data
+
+type FieldType = {
+    id?: Number;
+    name?: string;
+    username?: string;
+};
 
 const AddEntryModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +31,12 @@ const AddEntryModal = () => {
         console.log("canceled.");
     };
 
+    const submit = (values: FieldType) => {
+        // saveUsers(JSON.stringify(values))
+        console.log('in submit:',values)
+        saveUsers(values)
+    }
+
     return (
         <>
             <Button type="primary" onClick={showModal}>
@@ -36,9 +50,9 @@ const AddEntryModal = () => {
                 footer={[
                     <Button form='myform' key='submit' htmlType='submit'>Submit</Button>
                 ]}
-                width={360}
+                width={200}
                 >
-                <AddEntryForm onFinishCb={handleOk}/>
+                <AddEntryForm onFinishCb={(e: FieldType) => {submit(e); handleOk();}}/>
             </Modal>
         </>
     )
