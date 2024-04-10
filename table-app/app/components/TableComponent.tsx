@@ -39,13 +39,13 @@ const TableComponent = ( {users}: Props ) => {
           title: 'Action',
           key: 'action',
           render: (_, record) => (
-            <a onClick={ () => removeUser(record.id)}>delete</a>
+            <a onClick={ () => removeUser(record.id)} className="deleteButton" >delete</a>
           )
         }
       ];
     return (
       <>
-        <Table dataSource={users} columns={columns} rowKey="id" style={{width: "50rem"}}/>
+        <Table dataSource={users} columns={columns} rowKey="id" style={{width: "50rem"}} pagination={{style:{colorScheme:""}}}/>
       </>
     )
 }

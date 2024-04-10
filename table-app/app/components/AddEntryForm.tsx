@@ -1,10 +1,9 @@
 import React from 'react'
 import { Flex, Form, Input, InputNumber} from 'antd';
-import { validateId } from '../actions';
+import { validateId } from '@/app/actions';
 
 interface Props{
     onFinishCb: (values: FieldType) => void;
-    // validateId: (id: number) => boolean;
 }
 
 type FieldType = {
