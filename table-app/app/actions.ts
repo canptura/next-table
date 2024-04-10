@@ -10,7 +10,7 @@ interface User {
     username: string;
 }
 
-const dataFile = 'users.json';
+const dataFile = '/app/user-data.json';
 
 export async function loadUsers() {
     let userJson = await fsPromises.readFile(path.join(process.cwd(), dataFile), 'utf-8');
