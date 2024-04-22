@@ -7,11 +7,11 @@ interface Props{
 }
 
 type FieldType = {
-    id?: Number;
-    name?: string;
-    username?: string;
+    id: number;
+    name: string;
+    username: string;
 };
-
+/** Component: containing a form to receive data for a new entry. Also handles the validation process. */
 const AddEntryForm = ({onFinishCb}: Props) => {
     const [form] = Form.useForm()
     return (

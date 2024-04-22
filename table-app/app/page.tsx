@@ -19,7 +19,6 @@ export default async function Home() {
 
     <div style={{margin: "auto", width: "50rem"}}>
       <Space direction='vertical'>
-        <h1>Sample Table</h1>
         <AddEntryModal />
         <TableComponent users={users}/>
       </Space>

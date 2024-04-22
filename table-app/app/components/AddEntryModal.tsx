@@ -5,11 +5,11 @@ import AddEntryForm from './AddEntryForm';
 import { saveUser } from '@/app/actions';
 
 type FieldType = {
-    id?: Number;
-    name?: string;
-    username?: string;
+    id: number;
+    name: string;
+    username: string;
 };
-
+/** Component: containing a modal to add new entries. */
 const AddEntryModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
