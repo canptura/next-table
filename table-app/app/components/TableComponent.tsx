@@ -4,18 +4,19 @@ import type { TableColumnsType } from 'antd';
 import { removeUser } from "@/app/actions";
 
 
-interface User {
+type FieldType = {
     id: number;
     name: string;
     username: string;
 };
 
-interface Props {
-    users: User[];
-};
+type Props = {
+    users: FieldType[];
+}
 
+/** Component: containing the table which shows the loaded data. The table is sortable by each of its columns. */
 const TableComponent = ( {users}: Props ) => {
-    const columns: TableColumnsType<User> = [
+    const columns: TableColumnsType<FieldType> = [
         {
           title: 'ID',
           dataIndex: 'id',

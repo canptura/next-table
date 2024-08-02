@@ -5,11 +5,10 @@ import AddEntryForm from './AddEntryForm';
 import { saveUser } from '@/app/actions';
 
 type FieldType = {
-    id?: Number;
-    name?: string;
-    username?: string;
+    id: number;
+    name: string;
+    username: string;
 };
-
 interface User {
     id: number;
     name: string;
@@ -20,6 +19,7 @@ interface Props {
     users: User[];
 };
 
+/** Component: containing a modal to add new entries. */
 const AddEntryModal = ( {users}: Props ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
