@@ -12,7 +12,7 @@ type FieldType = {
     name: string;
     username: string;
 };
-/** Component: containing a form to receive data for a new entry. Also handles the validation process. */
+
 interface User {
     id: number;
     name: string;
@@ -20,7 +20,7 @@ interface User {
 };
 
 
-
+/** Component: containing a form to receive data for a new entry. Also handles the validation process. */
 const AddEntryForm = ({onFinishCb, users}: Props) => {
     const [form] = Form.useForm()
 
