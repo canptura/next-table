@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Table } from "antd";
 import type { TableColumnsType } from 'antd';
 import { removeUser } from "@/app/actions";
@@ -8,11 +8,11 @@ interface User {
     id: number;
     name: string;
     username: string;
-}
+};
 
 interface Props {
     users: User[];
-}
+};
 
 const TableComponent = ( {users}: Props ) => {
     const columns: TableColumnsType<User> = [

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Button, Modal} from 'antd'
 import React, { useState } from 'react'
 import AddEntryForm from './AddEntryForm';
@@ -10,7 +10,17 @@ type FieldType = {
     username?: string;
 };
 
-const AddEntryModal = () => {
+interface User {
+    id: number;
+    name: string;
+    username: string;
+};
+
+interface Props {
+    users: User[];
+};
+
+const AddEntryModal = ( {users}: Props ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => {
@@ -45,7 +55,7 @@ const AddEntryModal = () => {
                     <Button form='newEntryForm' key='submit' htmlType='submit'>Submit</Button>
                 ]}
                 >
-                <AddEntryForm onFinishCb={(e: FieldType) => {submit(e); handleOk();}}/>
+                <AddEntryForm users={users} onFinishCb={(e: FieldType) => {submit(e); handleOk();}}/>
             </Modal>
         </>
     )

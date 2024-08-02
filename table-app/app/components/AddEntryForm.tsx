@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Flex, Form, Input, InputNumber} from 'antd';
 import { validateId } from '@/app/actions';
 
 interface Props{
     onFinishCb: (values: FieldType) => void;
+    users: User[];
 }
 
 type FieldType = {
@@ -12,8 +13,17 @@ type FieldType = {
     username?: string;
 };
 
-const AddEntryForm = ({onFinishCb}: Props) => {
+interface User {
+    id: number;
+    name: string;
+    username: string;
+};
+
+
+
+const AddEntryForm = ({onFinishCb, users}: Props) => {
     const [form] = Form.useForm()
+
     return (
         <Form
             form={form}
@@ -38,7 +48,7 @@ const AddEntryForm = ({onFinishCb}: Props) => {
                         {
                             message: 'ID already taken!',
                             validator: async (_, value) => {
-                                if (await validateId(value)) {
+                                if (users.map( (e) => e.id).indexOf(value) === -1) {
                                     return Promise.resolve();
                                 } else {
                                     return Promise.reject('some MSG');
