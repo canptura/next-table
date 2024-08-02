@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Flex, Form, Input, InputNumber} from 'antd';
 import { validateId } from '@/app/actions';
 
-interface Props{
+type Props = {
     onFinishCb: (values: FieldType) => void;
     users: User[];
 }
@@ -13,7 +13,7 @@ type FieldType = {
     username: string;
 };
 
-interface User {
+type User = {
     id: number;
     name: string;
     username: string;

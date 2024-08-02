@@ -4,7 +4,7 @@ import AddEntryModal from "./components/AddEntryModal";
 import { Space, Col, Row } from "antd";
 import { loadUsers } from "./actions";
 
-interface User {
+type User = {
   id: number;
   name: string;
   username: string;

@@ -9,13 +9,13 @@ type FieldType = {
     name: string;
     username: string;
 };
-interface User {
+type User = {
     id: number;
     name: string;
     username: string;
 };
 
-interface Props {
+type Props = {
     users: User[];
 };
 
